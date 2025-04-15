@@ -2022,6 +2022,8 @@ def opencloudServer(storage = "decomposed", accounts_hash_difficulty = 4, depend
             },
         },
         "commands": [
+            "apt-get update",
+            "apt-get install -y inotify-tools",
             "%s init --insecure true" % dirs["opencloudBin"],
             "cat $OC_CONFIG_DIR/opencloud.yaml",
             "cp tests/config/woodpecker/app-registry.yaml $OC_CONFIG_DIR/app-registry.yaml",

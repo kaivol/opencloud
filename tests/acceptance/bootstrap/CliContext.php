@@ -436,4 +436,21 @@ class CliContext implements Context {
 		$response = CliHelper::runCommand($body);
 		Assert::assertEquals("200", $response->getStatusCode(), "Failed to clean upload sessions");
 	}
+
+	/**
+	 * @When the administrator creates folder :folder for user :user
+	 *
+	 * @param string $folder
+	 * @param string $user
+	 *
+	 * @return void
+	 */
+	public function theAdministratorCreatesFolder(string $folder, string $user): void {
+		$userUuid = $this->featureContext->getUserIdByUserName($user);
+		$body = [
+			"command" => "mkdir -p /srv/app/tmp/opencloud/storage/users/users/$userUuid/$folder",
+			"raw" => true
+		];
+		$this->featureContext->setResponse(CliHelper::runCommand($body));
+	}
 }
