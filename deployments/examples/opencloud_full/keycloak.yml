@@ -15,7 +15,8 @@ services:
       PROXY_OIDC_REWRITE_WELLKNOWN: "true"
       WEB_OIDC_CLIENT_ID: ${OC_OIDC_CLIENT_ID:-web}
 
-      PROXY_USER_OIDC_CLAIM: "preferred_username"
+      PROXY_USER_OIDC_CLAIM: "sub"
+      PROXY_AUTOPROVISION_CLAIM_USERNAME: "sub"
       PROXY_USER_CS3_CLAIM: "username"
       OC_EXCLUDE_RUN_SERVICES: "idp"
       
