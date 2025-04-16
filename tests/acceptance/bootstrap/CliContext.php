@@ -448,7 +448,7 @@ class CliContext implements Context {
 	public function theAdministratorCreatesFolder(string $folder, string $user): void {
 		$userUuid = $this->featureContext->getUserIdByUserName($user);
 		$body = [
-			"command" => "mkdir -p /srv/app/tmp/opencloud/storage/users/users/$userUuid/$folder",
+			"command" => "mkdir -p root/.opencloud/storage/users/users/$userUuid/$folder",
 			"raw" => true
 		];
 		$this->featureContext->setResponse(CliHelper::runCommand($body));
