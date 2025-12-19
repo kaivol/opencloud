@@ -42,6 +42,9 @@ func DefaultConfig() *config.Config {
 		OIDC: config.OIDC{
 			Issuer: "https://localhost:9200",
 
+			ClientID: "web",
+			Scopes:   "openid profile email",
+
 			AccessTokenVerifyMethod: config.AccessTokenVerificationJWT,
 			SkipUserInfo:            false,
 			UserinfoCache: &config.Cache{

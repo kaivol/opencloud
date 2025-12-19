@@ -113,11 +113,14 @@ const (
 // with the configured oidc-provider
 type OIDC struct {
 	Issuer                  string `yaml:"issuer" env:"OC_URL;OC_OIDC_ISSUER;PROXY_OIDC_ISSUER" desc:"URL of the OIDC issuer. It defaults to URL of the builtin IDP." introductionVersion:"1.0.0"`
+	ClientID                string `json:"client_id,omitempty" yaml:"client_id" env:"OC_OIDC_CLIENT_ID;PROXY_OIDC_CLIENT_ID" desc:"The OIDC client ID which OpenCloud uses. This client needs to be set up in your IDP. Note that this setting has no effect when using the builtin IDP." introductionVersion:"1.0.0"`
+	Scopes                  string `json:"scope,omitempty" yaml:"scope" env:"OC_OIDC_SCOPE;PROXY_OIDC_SCOPE" desc:"OIDC scopes to request during authentication to authorize access to user details. Defaults to 'openid profile email'. Values are separated by blank. More example values but not limited to are 'address' or 'phone' etc." introductionVersion:"1.0.0"`
 	Insecure                bool   `yaml:"insecure" env:"OC_INSECURE;PROXY_OIDC_INSECURE" desc:"Disable TLS certificate validation for connections to the IDP. Note that this is not recommended for production environments." introductionVersion:"1.0.0"`
 	AccessTokenVerifyMethod string `yaml:"access_token_verify_method" env:"PROXY_OIDC_ACCESS_TOKEN_VERIFY_METHOD" desc:"Sets how OIDC access tokens should be verified. Possible values are 'none' and 'jwt'. When using 'none', no special validation apart from using it for accessing the IDP's userinfo endpoint will be done. When using 'jwt', it tries to parse the access token as a jwt token and verifies the signature using the keys published on the IDP's 'jwks_uri'." introductionVersion:"1.0.0"`
 	SkipUserInfo            bool   `yaml:"skip_user_info" env:"PROXY_OIDC_SKIP_USER_INFO" desc:"Do not look up user claims at the userinfo endpoint and directly read them from the access token. Incompatible with 'PROXY_OIDC_ACCESS_TOKEN_VERIFY_METHOD=none'." introductionVersion:"1.0.0"`
 	UserinfoCache           *Cache `yaml:"user_info_cache"`
 	JWKS                    JWKS   `yaml:"jwks"`
+	PublishConfig           bool   `yaml:"publish_oidc_config" env:"PROXY_OIDC_PUBLISH_CONFIG" desc:"Publish the the OIDC config. Needed by the Desktop Client, Android Client and iOS Client to use OIDC." introductionVersion:"1.0.0"`
 	RewriteWellKnown        bool   `yaml:"rewrite_well_known" env:"PROXY_OIDC_REWRITE_WELLKNOWN" desc:"Enables rewriting the /.well-known/openid-configuration to the configured OIDC issuer. Needed by the Desktop Client, Android Client and iOS Client to discover the OIDC provider." introductionVersion:"1.0.0"`
 }
 

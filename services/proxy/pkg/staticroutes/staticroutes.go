@@ -42,6 +42,11 @@ func (s *StaticRouteHandler) Handler() http.Handler {
 			r.Get("/.well-known/openid-configuration", s.oIDCWellKnownRewrite(s.Config.OIDC.Issuer))
 		}
 
+		// oidc config
+		if s.Config.OIDC.PublishConfig {
+			r.Get("/oidc-config", s.oidcConfig(s.Config.OIDC))
+		}
+
 		// Send all requests to the proxy handler
 		r.HandleFunc("/*", s.Proxy.ServeHTTP)
 	})
